@@ -318,17 +318,39 @@ const examples = (()=>{
         assert(arr_eq(values, dec));
         console.log(values, `[str.length=${enc.length}]`, dec);
     })();
+
+    (function single_values_to_array_game(){
+        const // In-game use case example: id
+            id = '5a216a3df33b4e435ca8c5ab',    // object.id example
+            values = [];                        // array of hex numbers
+        
+        for(let i = 0, len = id.length; i < len; ++i) {
+            const point = parseInt(id[i], 16);
+            values.push(point);
+        }
+
+        const id_codec = new Codec({ depth:4, array: 1 });
+        enc = id_codec.encode(values);
+        dec = id_codec.decode(enc);
+
+        const decoded_id = dec.reduce((acc, x)=> (acc + x.toString(16)), '');
+
+        assert(id === decoded_id);
+        console.log(`${id}.len=${id.length}`, `[str.len=${enc.length}]`, decoded_id);
+    })();
 });
 
 (function main() {
     
     try {
         
-        const N_tests = 5;
-        for(let i = 0; i < N_tests; ++i) array_test();
-        for(let i = 0; i < N_tests; ++i) single_test();
+        if(1) {
+            const N_tests = 1;
+            for(let i = 0; i < N_tests; ++i) array_test();
+            for(let i = 0; i < N_tests; ++i) single_test();
+            perf_test();
+        }
         
-        perf_test();
         examples();
         
     } catch(e) {
