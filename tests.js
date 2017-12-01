@@ -15,8 +15,8 @@ const arr_eq = (a,b)=>(a.length === b.length &&
 
 const array_test = (()=>{
     const arr_max_len   = 100;
-    const N_codecs      = 100;  // codecs per cycle
-    const N_arrays      = 100;  // inputs per codec
+    const N_codecs      = 1000; // codecs per cycle
+    const N_arrays      = 10;   // inputs per codec
     
     // encode(length) + decode(length)
     let total_length = 0, t = ms();
@@ -325,11 +325,11 @@ const examples = (()=>{
             values = [];                        // array of hex numbers
         
         for(let i = 0, len = id.length; i < len; ++i) {
-            const point = parseInt(id[i], 16);
-            values.push(point);
+            const hex = parseInt(id[i], 16);
+            values.push(hex);
         }
 
-        const id_codec = new Codec({ depth:4, array: 1 });
+        const id_codec = new Codec({ depth:4, array:1 });
         enc = id_codec.encode(values);
         dec = id_codec.decode(enc);
 
@@ -345,7 +345,8 @@ const examples = (()=>{
     try {
         
         if(1) {
-            const N_tests = 1;
+            console.log('Tests and performance:');
+            const N_tests = 10;
             for(let i = 0; i < N_tests; ++i) array_test();
             for(let i = 0; i < N_tests; ++i) single_test();
             perf_test();
