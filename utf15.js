@@ -206,7 +206,7 @@ const Impl = (()=>{
         /// @param arg -- single value or array of values to be encoded
         /// @returns encoded string
         encode(arg) {
-            assert(+Array.isArray(arg) ^ !this.array, TypeCodecError,
+            assert((+Array.isArray(arg) | +(!!(arg).BYTES_PER_ELEMENT)) ^ !this.array, TypeCodecError,
                 'Incompatible codec (array <=> single value), arg =', arg);
             
             let res = '';
