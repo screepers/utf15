@@ -96,9 +96,11 @@ const Impl = (()=>{
     
     function encode_array(res, values) {
         const depth_is_array = Array.isArray(this.depth);
-        const depths = depth_is_array ? this.depth : (new Array(values.length)).fill(this.depth);
+        
+        const fixed_depth = depth_is_array ? 0 : this.depth;
+        const depths = depth_is_array ? this.depth : [];
 
-        assert(!depth_is_array || depths.length === values.length, TypeCodecError,
+        assert(fixed_depth || depths.length === values.length, TypeCodecError,
             'Wrong depths array length:', depths, values);
 
         if(!depth_is_array) // Save array length as meta
@@ -110,7 +112,7 @@ const Impl = (()=>{
         for(let i = 0, len = values.length; i < len; ++i) {
 
             // Current value and its bit depth
-            const value = values[i], depth = depths[i];
+            const value = values[i], depth = fixed_depth || depths[i];
 
             // Cycle over value bits
             for(let value_done = 0; value_done < depth;) {
@@ -150,7 +152,8 @@ const Impl = (()=>{
 
         let it = 0, i = 0;
         const length = depth_is_array ? meta.depth.length : code_point_to_num(str.codePointAt(it++));
-        const depths = depth_is_array ? meta.depth : (new Array(length)).fill(meta.depth);
+        const fixed_depth = depth_is_array ? 0 : meta.depth;
+        const depths = depth_is_array ? meta.depth : [];
         const values = new Array(length);
         
         let symbol_done = 0;
@@ -159,7 +162,7 @@ const Impl = (()=>{
         // Cycle over values
         while(i < length) {
 
-            const depth = depths[i];
+            const depth = fixed_depth || depths[i];
             let value_acc = 0, value_done = 0;
 
             // Cycle over value bits
@@ -199,7 +202,7 @@ const Impl = (()=>{
             cfg = cfg || {};
             this.meta   = +(!!cfg.meta);
             this.array  = +(!!cfg.array);
-            this.depth  = cfg.depth || MAX_DEPTH;
+            this.depth  = +cfg.depth || MAX_DEPTH;
             check_cfg(this);
         }
         
