@@ -1,0 +1,12 @@
+{
+  "name": "screeps-utf15",
+  "version": "1.0.0",
+  "description": "",
+  "main": "utf15.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/screepers/utf15.git"
+  },
+  "author": "screepers",
+  "license": "MIT"
+}
