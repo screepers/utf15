@@ -202,7 +202,7 @@ const Impl = (()=>{
             cfg = cfg || {};
             this.meta   = +(!!cfg.meta);
             this.array  = +(!!cfg.array);
-            this.depth  = +cfg.depth || MAX_DEPTH;
+            this.depth  = cfg.depth || MAX_DEPTH;
             check_cfg(this);
         }
         
