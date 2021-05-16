@@ -1,0 +1,12 @@
+{
+  "name": "screeps-utf15",
+  "version": "1.0.0",
+  "description": "Screeps (https://screeps.com/) utility library which provides ability to encode integers as UTF-16 strings",
+  "main": "utf15.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/screepers/utf15.git"
+  },
+  "author": "Mototroller <https://github.com/Mototroller>",
+  "license": "MIT"
+}
