@@ -1,6 +1,6 @@
 'use strict';
 
-const utf15 = require('./utf15');
+const utf15 = require('./dist/utf15');
 const Codec = utf15.Codec;
 const MAX_DEPTH = utf15.MAX_DEPTH;
 
@@ -22,7 +22,7 @@ const array_test = (()=>{
     let total_length = 0, t = ms();
     const len_out = {};
     
-    [0,1].forEach((meta)=>{
+    [false,true].forEach((meta)=>{
         
         // Fixed depth
         do_cycles(N_codecs, ()=>{
