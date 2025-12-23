@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "module": "nodenext",
+    "lib": ["es2018"],
+    "target": "es2018",
+    "moduleResolution": "nodenext",
+    "outDir": "dist",
+    "declaration": true,
+    "sourceMap": true,
+    "strict": true,
+  },
+  "exclude": [
+    "dist/**/*.ts",
+    "node_modules/**/*.ts"
+  ]
+}
